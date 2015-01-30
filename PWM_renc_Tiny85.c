@@ -50,8 +50,8 @@ void initInterrupts(void)
 ISR(INT0_vect)
 {
 	// When an interrupt occurs, we only have to check the level of
-	// of pin PD5 to determine the direction
-	if (PIND & _BV(PB0)){
+	// of pin PB0 to determine the direction
+	if (PINB & _BV(PB0)){
 	// Increase enc
 		if (enc<1024){
 			enc++;
