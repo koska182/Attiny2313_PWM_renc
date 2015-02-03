@@ -10,8 +10,6 @@
 
 uint16_t enc = 0;
 
-// Subroutine declarations
-void initInterrupts(void);
 
 int main(void)
 {
@@ -22,15 +20,7 @@ int main(void)
 	// clock source = clock / 1 ; start PWM
 	TCCR1B = (1 << CS10);
 	
-	while(1)
-	{
-		//OCR1A  = 0x3FF;     // maximum 10-bit value
-	}
-}
-
-// Routine to setup INT1
-void initInterrupts(void)
-{
+	// Routine to setup INT1
 	// Assure that pin PD3 (INT1) and PD5 are inputs
 	DDRD &= ~(1<<PD5);
 	DDRD &= ~(1<<PD3);
@@ -43,6 +33,12 @@ void initInterrupts(void)
 
 	// Enable and INT1
 	GIMSK |= (1<<INT1);
+	
+	sei();
+	while(1)
+	{
+		//OCR1A  = 0x3FF;     // maximum 10-bit value
+	}
 }
 
 // The Interrupt Service Routine for external INT1
